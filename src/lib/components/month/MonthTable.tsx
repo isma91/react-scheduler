@@ -45,6 +45,8 @@ const MonthTable = ({ daysList, resource, eachWeekStart }: Props) => {
     stickyNavigation,
     timeZone,
     onClickMore,
+    stickyNavigationOffset,
+    stickyNavigationHeight,
   } = useStore();
   const { weekDays, startHour, endHour, cellRenderer, headRenderer, disableGoToDay } = month!;
   const { headersRef, bodyRef } = useSyncScroll();
@@ -180,6 +182,8 @@ const MonthTable = ({ daysList, resource, eachWeekStart }: Props) => {
         indent="0"
         sticky="1"
         stickyNavigation={stickyNavigation}
+        stickyOffset={stickyNavigationOffset}
+        stickyHeight={stickyNavigationHeight}
       >
         {daysList.map((date, i) => (
           <Typography

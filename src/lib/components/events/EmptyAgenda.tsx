@@ -3,9 +3,11 @@ import { Typography } from "@mui/material";
 import useStore from "../../hooks/useStore";
 
 const EmptyAgenda = () => {
-  const { height, translations } = useStore();
+  const { height, translations, stickyNavigationOffset, stickyNavigationHeight } = useStore();
   return (
     <AgendaDiv
+      stickyOffset={stickyNavigationOffset}
+      stickyHeight={stickyNavigationHeight}
       sx={{
         borderWidth: 1,
         padding: 1,

@@ -21,6 +21,8 @@ const MonthAgenda = ({ events, resource }: Props) => {
     selectedDate,
     translations,
     alwaysShowAgendaDays,
+    stickyNavigationOffset,
+    stickyNavigationHeight,
   } = useStore();
   const { disableGoToDay, headRenderer } = month!;
   const daysOfMonth = getDaysInMonth(selectedDate);
@@ -35,7 +37,7 @@ const MonthAgenda = ({ events, resource }: Props) => {
   }
 
   return (
-    <AgendaDiv>
+    <AgendaDiv stickyOffset={stickyNavigationOffset} stickyHeight={stickyNavigationHeight}>
       {daysList.map((i) => {
         const day = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), i);
         const today = isTimeZonedToday({ dateLeft: day, timeZone });

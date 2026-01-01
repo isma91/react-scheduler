@@ -56,6 +56,8 @@ const WeekTable = ({
     hourFormat,
     timeZone,
     stickyNavigation,
+    stickyNavigationOffset,
+    stickyNavigationHeight,
   } = useStore();
   const { startHour, endHour, step, cellRenderer, disableGoToDay, headRenderer, hourRenderer } =
     week!;
@@ -133,6 +135,8 @@ const WeekTable = ({
         ref={headersRef}
         sticky="1"
         stickyNavigation={stickyNavigation}
+        stickyOffset={stickyNavigationOffset}
+        stickyHeight={stickyNavigationHeight}
       >
         <span className="rs__cell rs__time"></span>
         {daysList.map((date, i) => (

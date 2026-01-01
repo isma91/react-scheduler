@@ -39,6 +39,7 @@ const Navigation = () => {
     toggleAgenda,
     enableAgenda,
     customHeaderContent,
+    stickyNavigationOffset,
   } = useStore();
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const theme = useTheme();
@@ -96,7 +97,7 @@ const Navigation = () => {
   if (!navigation && disableViewNavigator) return null;
 
   return (
-    <NavigationDiv sticky={stickyNavigation ? "1" : "0"}>
+    <NavigationDiv sticky={stickyNavigation ? "1" : "0"} offset={stickyNavigationOffset}>
       <div data-testid="date-navigator">{navigation && renderDateSelector()}</div>
 
       {customHeaderContent && (

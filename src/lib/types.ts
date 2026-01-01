@@ -372,6 +372,17 @@ export interface SchedulerProps {
    * const header = useCallback(() => <Button>{state}</Button>, [state]);
    */
   customHeaderContent?: () => React.ReactNode;
+  /**
+   * Top offset when sticky navigation is enabled (in pixels).
+   * @default 0
+   */
+  stickyNavigationOffset?: number;
+  /**
+   * Height of the sticky navigation header in pixels.
+   * Used to calculate offset for sticky elements below the header.
+   * @default 40
+   */
+  stickyNavigationHeight?: number;
 }
 
 export interface SchedulerRef {

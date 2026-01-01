@@ -50,6 +50,8 @@ const Day = () => {
     timeZone,
     stickyNavigation,
     agenda,
+    stickyNavigationOffset,
+    stickyNavigationHeight,
   } = useStore();
 
   const { startHour, endHour, step, cellRenderer, headRenderer, hourRenderer } = day!;
@@ -146,7 +148,13 @@ const Day = () => {
       return (
         <>
           {/* Header */}
-          <TableGrid days={1} sticky="1" stickyNavigation={stickyNavigation}>
+          <TableGrid
+            days={1}
+            sticky="1"
+            stickyNavigation={stickyNavigation}
+            stickyOffset={stickyNavigationOffset}
+            stickyHeight={stickyNavigationHeight}
+          >
             <span className="rs__cell"></span>
             <span
               className={`rs__cell rs__header ${isToday(selectedDate) ? "rs__today_cell" : ""}`}

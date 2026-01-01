@@ -14,7 +14,16 @@ type Props = {
   events: ProcessedEvent[];
 };
 const WeekAgenda = ({ daysList, resource, events }: Props) => {
-  const { week, handleGotoDay, locale, timeZone, translations, alwaysShowAgendaDays } = useStore();
+  const {
+    week,
+    handleGotoDay,
+    locale,
+    timeZone,
+    translations,
+    alwaysShowAgendaDays,
+    stickyNavigationOffset,
+    stickyNavigationHeight,
+  } = useStore();
   const { disableGoToDay, headRenderer } = week!;
 
   const hasEvents = useMemo(() => {
@@ -26,7 +35,7 @@ const WeekAgenda = ({ daysList, resource, events }: Props) => {
   }
 
   return (
-    <AgendaDiv>
+    <AgendaDiv stickyOffset={stickyNavigationOffset} stickyHeight={stickyNavigationHeight}>
       {daysList.map((day, i) => {
         const today = isTimeZonedToday({ dateLeft: day, timeZone });
         const dayEvents = filterTodayAgendaEvents(events, day);

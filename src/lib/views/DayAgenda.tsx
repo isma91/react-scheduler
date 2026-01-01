@@ -13,7 +13,15 @@ type Props = {
   resource?: DefaultResource;
 };
 const DayAgenda = ({ events, resource }: Props) => {
-  const { day, locale, selectedDate, translations, alwaysShowAgendaDays } = useStore();
+  const {
+    day,
+    locale,
+    selectedDate,
+    translations,
+    alwaysShowAgendaDays,
+    stickyNavigationOffset,
+    stickyNavigationHeight,
+  } = useStore();
   const { headRenderer } = day!;
 
   const dayEvents = useMemo(() => {
@@ -25,7 +33,7 @@ const DayAgenda = ({ events, resource }: Props) => {
   }
 
   return (
-    <AgendaDiv>
+    <AgendaDiv stickyOffset={stickyNavigationOffset} stickyHeight={stickyNavigationHeight}>
       <div className="rs__agenda_row rs__today_cell">
         <div className="rs__cell rs__agenda__cell">
           {typeof headRenderer === "function" ? (
