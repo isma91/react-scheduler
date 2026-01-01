@@ -20,9 +20,16 @@ export const StoreProvider = ({ children, initial }: Props) => {
       ...prev,
       onEventDrop: initial.onEventDrop,
       customEditor: initial.customEditor,
+      customHeaderContent: initial.customHeaderContent,
       events: initial.events || [],
     }));
-  }, [initial.onEventDrop, initial.customEditor, initial.events]);
+  }, [initial.onEventDrop, initial.customEditor, initial.events, initial.customHeaderContent]);
+
+  useEffect(() => {
+    if ("undefined" !== typeof initial.loading) {
+      set((prev) => ({ ...prev, loading: initial.loading }));
+    }
+  }, [initial.loading]);
 
   const handleState = (value: SchedulerState[keyof SchedulerState], name: keyof SchedulerState) => {
     set((prev) => ({ ...prev, [name]: value }));

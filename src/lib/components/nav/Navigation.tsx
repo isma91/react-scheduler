@@ -38,6 +38,7 @@ const Navigation = () => {
     agenda,
     toggleAgenda,
     enableAgenda,
+    customHeaderContent,
   } = useStore();
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const theme = useTheme();
@@ -97,6 +98,10 @@ const Navigation = () => {
   return (
     <NavigationDiv sticky={stickyNavigation ? "1" : "0"}>
       <div data-testid="date-navigator">{navigation && renderDateSelector()}</div>
+
+      {customHeaderContent && (
+        <div className="rs__custom_header_content">{customHeaderContent()}</div>
+      )}
 
       <div
         className="rs__view_navigator"

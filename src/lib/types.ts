@@ -364,6 +364,14 @@ export interface SchedulerProps {
    *
    */
   onCellClick?(start: Date, end: Date, resourceKey?: string, resourceVal?: string | number): void;
+  /**
+   * Custom content to display in the scheduler header.
+   * Wrap with useCallback if using state/props to avoid re-renders.
+   *
+   * @example
+   * const header = useCallback(() => <Button>{state}</Button>, [state]);
+   */
+  customHeaderContent?: () => React.ReactNode;
 }
 
 export interface SchedulerRef {
