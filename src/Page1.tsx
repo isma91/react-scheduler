@@ -5,8 +5,6 @@ import { SchedulerRef } from "./lib/types";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
-const events = EVENTS.slice(3, 6);
-
 function Page1() {
   const calendarRef = useRef<SchedulerRef>(null);
   const [loading, setLoading] = useState(false);
@@ -35,12 +33,28 @@ function Page1() {
 
         <div style={{ marginTop: "50px" }}>
           <Scheduler
+            day={{
+              startHour: 0,
+              endHour: 24,
+              step: 60,
+              navigation: true,
+            }}
+            week={{
+              weekDays: [0, 1, 2, 3, 4, 5, 6],
+              weekStartOn: 1,
+              startHour: 0,
+              endHour: 24,
+              step: 60,
+              navigation: true,
+              disableGoToDay: true,
+            }}
             ref={calendarRef}
-            events={events}
+            events={EVENTS}
             loading={loading}
             customHeaderContent={customHeader}
             stickyNavigation={true}
             stickyNavigationOffset={64}
+            currentTimeBarColor="#ff00c3ff"
             // events={generateRandomEvents(200)}
           />
         </div>
