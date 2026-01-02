@@ -1,14 +1,20 @@
 # React Scheduler Component
 
-[![npm package](https://img.shields.io/npm/v/@aldabil/react-scheduler/latest.svg)](https://www.npmjs.com/package/@aldabil/react-scheduler)
-[![Twitter URL](https://img.shields.io/twitter/url?label=%40aldabil&style=social&url=https%3A%2F%2Ftwitter.com%2Fintent%2Ffollow%3Fscreen_name%3Daldabil21)](https://twitter.com/intent/follow?screen_name=aldabil21)
+> :rocket: **Fork Notice**: This is a modernized fork of [@aldabil/react-scheduler](https://github.com/aldabil21/react-scheduler) with:
+> - React 19 support
+> - MUI 7 / @mui/x-date-pickers 8 support  
+> - date-fns 4 support
+> - Additional features (see changelog)
+
+[![npm package](https://img.shields.io/npm/v/@isma91/react-scheduler/latest.svg)](https://www.npmjs.com/package/@isma91/react-scheduler)
+
 
 > :warning: **Notice**: This component uses `mui`/`emotion`/`date-fns`. if your project is not already using these libs, this component may not be suitable.
 
 ## Installation
 
 ```jsx
-npm i @aldabil/react-scheduler
+npm i @isma91/react-scheduler
 ```
 
 If you plan to use `recurring` events in your scheduler, install `rrule` [package](https://www.npmjs.com/package/rrule)
@@ -16,7 +22,7 @@ If you plan to use `recurring` events in your scheduler, install `rrule` [packag
 ## Usage
 
 ```jsx
-import { Scheduler } from "@aldabil/react-scheduler";
+import { Scheduler } from "@isma91/react-scheduler";
 ```
 
 ## Example
@@ -93,14 +99,21 @@ All props are _optional_
 | onViewChange | Function(view: View, agenda?: boolean): void. Triggered when navigation view changes
 | stickyNavigation | If `true`, the navigation controller bar will be sticky
 | onClickMore | Function(date: Date, goToDay: Function(date: Date): void): void. Triggered when the "More..." button is clicked, it receives the date and a `goToDay` function that shows a day view for a specfic date.
+| stickyNavigationOffset | number. Top offset in pixels when sticky navigation is enabled. <br>_Default_: `0` |
+| stickyNavigationHeight | number. Height of the sticky navigation header in pixels. Used to calculate offset for sticky elements below the header. <br>_Default_: `40` |
+| customHeaderContent | Function. Custom content to display in the scheduler header. Wrap with `useCallback` if using state/props to avoid re-renders. <br>_Example_: `() => <Button>Refresh</Button>` |
+| currentTime | Date. Override the current time used for the time indicator bar. Useful when working with different timezones or for testing. <br>_Default_: `new Date()` |
+| showCurrentTimeBar | boolean. Show/hide the current time indicator bar. <br>_Default_: `true` |
+| currentTimeBarColor | string. Color of the current time indicator bar. <br>_Default_: `theme.palette.error.light` (red) |
+| forceInlineMultiDay | boolean. When `true`, events spanning multiple days with `allDay: false` will be displayed in the time grid instead of the all-day header. Events will be split visually at midnight boundaries. <br>_Default_: `false` |
 
 ### SchedulerRef
 
 Used to help manage and control the internal state of the `Scheduler` component from outside of `Scheduler` props, Example:
 
 ```js
-import { Scheduler } from "@aldabil/react-scheduler";
-import type { SchedulerRef } from "@aldabil/react-scheduler/types"
+import { Scheduler } from "@isma91/react-scheduler";
+import type { SchedulerRef } from "@isma91/react-scheduler/types"
 
 const SomeComponent = () => {
   const calendarRef = useRef<SchedulerRef>(null);
