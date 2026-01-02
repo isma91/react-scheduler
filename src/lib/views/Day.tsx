@@ -101,7 +101,13 @@ const Day = () => {
 
   const renderMultiDayEvents = useCallback(
     (events: ProcessedEvent[]) => {
-      const todayMulti = filterMultiDaySlot(events, selectedDate, timeZone, forceInlineMultiDay);
+      const todayMulti = filterMultiDaySlot(
+        events,
+        selectedDate,
+        timeZone,
+        undefined,
+        forceInlineMultiDay
+      );
       return (
         <div
           className="rs__block_col"
@@ -147,6 +153,7 @@ const Day = () => {
         shouldEqualize ? events : resourcedEvents,
         selectedDate,
         timeZone,
+        undefined,
         forceInlineMultiDay
       );
       const headerHeight = MULTI_DAY_EVENT_HEIGHT * allWeekMulti.length + 45;
