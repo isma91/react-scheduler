@@ -154,7 +154,7 @@ export const EVENTS: ProcessedEvent[] = [
       new Date(new Date(new Date().setHours(9)).setMinutes(0)).setDate(new Date().getDate() - 2)
     ),
     end: new Date(
-      new Date(new Date(new Date().setHours(2)).setMinutes(0)).setDate(new Date().getDate() - 1)
+      new Date(new Date(new Date().setHours(2)).setMinutes(0)).setDate(new Date().getDate() + 2)
     ),
     color: "#079000ff",
     allDay: false,

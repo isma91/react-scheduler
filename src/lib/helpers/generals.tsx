@@ -7,6 +7,8 @@ import {
   differenceInMilliseconds,
   endOfDay,
   format,
+  isAfter,
+  isBefore,
   isSameDay,
   isWithinInterval,
   startOfDay,
@@ -157,16 +159,44 @@ export const getRecurrencesForDate = (event: ProcessedEvent, today: Date, timeZo
 export const filterTodayEvents = (
   events: ProcessedEvent[],
   today: Date,
-  timeZone?: string
+  timeZone?: string,
+  forceInlineMultiDay?: boolean
 ): ProcessedEvent[] => {
   const list: ProcessedEvent[] = [];
 
   for (let i = 0; i < events.length; i++) {
     for (const rec of getRecurrencesForDate(events[i], today, timeZone)) {
-      const isToday =
+      const isSingleDayEvent =
         !rec.allDay && isSameDay(today, rec.start) && !differenceInDaysOmitTime(rec.start, rec.end);
-      if (isToday) {
+
+      if (isSingleDayEvent) {
         list.push(rec);
+        continue;
+      }
+
+      if (forceInlineMultiDay && !rec.allDay && differenceInDaysOmitTime(rec.start, rec.end) > 0) {
+        const dayStart = startOfDay(today);
+        const dayEnd = endOfDay(today);
+
+        const eventOverlapsToday =
+          isWithinInterval(today, { start: startOfDay(rec.start), end: endOfDay(rec.end) }) ||
+          isWithinInterval(rec.start, { start: dayStart, end: dayEnd }) ||
+          isWithinInterval(rec.end, { start: dayStart, end: dayEnd });
+
+        if (eventOverlapsToday) {
+          const segmentStart = isBefore(rec.start, dayStart) ? dayStart : rec.start;
+          const segmentEnd = isAfter(rec.end, dayEnd) ? dayEnd : rec.end;
+
+          list.push({
+            ...rec,
+            start: segmentStart,
+            end: segmentEnd,
+            _originalStart: rec.start,
+            _originalEnd: rec.end,
+            _hasPrev: isBefore(rec.start, dayStart),
+            _hasNext: isAfter(rec.end, dayEnd),
+          });
+        }
       }
     }
   }
@@ -205,14 +235,17 @@ export const filterMultiDaySlot = (
   events: ProcessedEvent[],
   date: Date | Date[],
   timeZone?: string,
-  lengthOnly?: boolean
+  lengthOnly?: boolean,
+  forceInlineMultiDay?: boolean
 ) => {
   const isMultiDates = Array.isArray(date);
   const list: ProcessedEvent[] = [];
   const multiPerDay: Record<string, ProcessedEvent[]> = {};
   for (let i = 0; i < events.length; i++) {
     const event = convertEventTimeZone(events[i], timeZone);
-    let withinSlot = event.allDay || differenceInDaysOmitTime(event.start, event.end) > 0;
+    const isMultiDay = differenceInDaysOmitTime(event.start, event.end) > 0;
+    const shouldForceInline = forceInlineMultiDay && !event.allDay && isMultiDay;
+    let withinSlot = event.allDay || (isMultiDay && !shouldForceInline);
     if (!withinSlot) continue;
     if (isMultiDates) {
       withinSlot = date.some((weekday) =>

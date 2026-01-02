@@ -55,6 +55,7 @@ const Day = () => {
     currentTime,
     showCurrentTimeBar,
     currentTimeBarColor,
+    forceInlineMultiDay,
   } = useStore();
 
   const { startHour, endHour, step, cellRenderer, headRenderer, hourRenderer } = day!;
@@ -100,7 +101,7 @@ const Day = () => {
 
   const renderMultiDayEvents = useCallback(
     (events: ProcessedEvent[]) => {
-      const todayMulti = filterMultiDaySlot(events, selectedDate, timeZone);
+      const todayMulti = filterMultiDaySlot(events, selectedDate, timeZone, forceInlineMultiDay);
       return (
         <div
           className="rs__block_col"
@@ -145,7 +146,8 @@ const Day = () => {
       const allWeekMulti = filterMultiDaySlot(
         shouldEqualize ? events : resourcedEvents,
         selectedDate,
-        timeZone
+        timeZone,
+        forceInlineMultiDay
       );
       const headerHeight = MULTI_DAY_EVENT_HEIGHT * allWeekMulti.length + 45;
       return (
@@ -191,7 +193,12 @@ const Day = () => {
                     {/* Events of this day - run once on the top hour column */}
                     {i === 0 && (
                       <TodayEvents
-                        todayEvents={filterTodayEvents(resourcedEvents, selectedDate, timeZone)}
+                        todayEvents={filterTodayEvents(
+                          resourcedEvents,
+                          selectedDate,
+                          timeZone,
+                          forceInlineMultiDay
+                        )}
                         today={START_TIME}
                         minuteHeight={MINUTE_HEIGHT}
                         startHour={startHour}

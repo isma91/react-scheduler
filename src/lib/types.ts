@@ -96,6 +96,14 @@ interface CalendarEvent {
    * passed as a children to mui <Avatar /> component
    */
   agendaAvatar?: React.ReactElement | string;
+  /** @internal Original start date before segment clipping */
+  _originalStart?: Date;
+  /** @internal Original end date before segment clipping */
+  _originalEnd?: Date;
+  /** @internal Segment continues from previous day */
+  _hasPrev?: boolean;
+  /** @internal Segment continues to next day */
+  _hasNext?: boolean;
 }
 export interface Translations {
   navigation: Record<View, string> & { today: string; agenda: string };
@@ -398,6 +406,13 @@ export interface SchedulerProps {
    * @default theme.palette.error.light (red)
    */
   currentTimeBarColor?: string;
+  /**
+   * When true, events spanning multiple days with allDay: false
+   * will be displayed in the time grid instead of the all-day header.
+   * Events will be split visually at midnight boundaries.
+   * @default false
+   */
+  forceInlineMultiDay?: boolean;
 }
 
 export interface SchedulerRef {

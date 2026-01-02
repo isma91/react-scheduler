@@ -36,8 +36,11 @@ const EventItemPopover = ({ anchorEl, event, onTriggerViewer }: Props) => {
     onEventEdit,
   } = useStore();
   const theme = useTheme();
-  const hideDates = differenceInDaysOmitTime(event.start, event.end) <= 0 && event.allDay;
   const hFormat = getHourFormat(hourFormat);
+  const displayStart = event._originalStart || event.start;
+  const displayEnd = event._originalEnd || event.end;
+  const hideDates = differenceInDaysOmitTime(displayStart, displayEnd) <= 0 && event.allDay;
+
   const idKey = resourceFields.idField;
   const hasResource = resources.filter((res) =>
     Array.isArray(event[idKey]) ? event[idKey].includes(res[idKey]) : res[idKey] === event[idKey]
@@ -139,9 +142,9 @@ const EventItemPopover = ({ anchorEl, event, onTriggerViewer }: Props) => {
               <EventNoteRoundedIcon />
               {hideDates
                 ? translations.event.allDay
-                : `${format(event.start, `dd MMMM yyyy ${hFormat}`, {
+                : `${format(displayStart, `dd MMMM yyyy ${hFormat}`, {
                     locale: locale,
-                  })} - ${format(event.end, `dd MMMM yyyy ${hFormat}`, {
+                  })} - ${format(displayEnd, `dd MMMM yyyy ${hFormat}`, {
                     locale: locale,
                   })}`}
             </Typography>

@@ -133,6 +133,7 @@ export const defaultProps = (props: Partial<SchedulerProps>) => {
     agenda,
     enableAgenda: typeof agenda === "undefined" || agenda,
     showCurrentTimeBar: true,
+    forceInlineMultiDay: false,
     ...otherProps,
   };
 };

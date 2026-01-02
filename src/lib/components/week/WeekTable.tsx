@@ -61,6 +61,7 @@ const WeekTable = ({
     currentTime,
     showCurrentTimeBar,
     currentTimeBarColor,
+    forceInlineMultiDay,
   } = useStore();
   const { startHour, endHour, step, cellRenderer, disableGoToDay, headRenderer, hourRenderer } =
     week!;
@@ -78,7 +79,8 @@ const WeekTable = ({
       shouldEqualize ? events : resourcedEvents,
       daysList,
       timeZone,
-      true
+      true,
+      forceInlineMultiDay
     );
     return MULTI_SPACE * allWeekMulti.length + 45;
   }, [
@@ -97,7 +99,13 @@ const WeekTable = ({
     resource?: DefaultResource
   ) => {
     const isFirstDayInWeek = isSameDay(weekStart, today);
-    const allWeekMulti = filterMultiDaySlot(events, daysList, timeZone);
+    const allWeekMulti = filterMultiDaySlot(
+      events,
+      daysList,
+      timeZone,
+      undefined,
+      forceInlineMultiDay
+    );
 
     const multiDays = allWeekMulti
       .filter((e) => (isBefore(e.start, weekStart) ? isFirstDayInWeek : isSameDay(e.start, today)))
@@ -181,7 +189,12 @@ const WeekTable = ({
                   {/* Events of each day - run once on the top hour column */}
                   {i === 0 && (
                     <TodayEvents
-                      todayEvents={filterTodayEvents(resourcedEvents, date, timeZone)}
+                      todayEvents={filterTodayEvents(
+                        resourcedEvents,
+                        date,
+                        timeZone,
+                        forceInlineMultiDay
+                      )}
                       today={date}
                       minuteHeight={minutesHeight}
                       startHour={startHour}
