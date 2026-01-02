@@ -21,9 +21,17 @@ export const StoreProvider = ({ children, initial }: Props) => {
       onEventDrop: initial.onEventDrop,
       customEditor: initial.customEditor,
       customHeaderContent: initial.customHeaderContent,
-      events: initial.events || [],
+      // Only sync events if NOT using getRemoteEvents
+      // Otherwise, let the internal state manage events
+      ...(initial.getRemoteEvents ? {} : { events: initial.events || [] }),
     }));
-  }, [initial.onEventDrop, initial.customEditor, initial.events, initial.customHeaderContent]);
+  }, [
+    initial.onEventDrop,
+    initial.customEditor,
+    initial.events,
+    initial.customHeaderContent,
+    initial.getRemoteEvents,
+  ]);
 
   useEffect(() => {
     if ("undefined" !== typeof initial.loading) {
