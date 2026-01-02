@@ -147,6 +147,18 @@ export const EVENTS: ProcessedEvent[] = [
     }),
     color: "#dc4552",
   },
+  {
+    event_id: 11,
+    title: "Event 11",
+    start: new Date(
+      new Date(new Date(new Date().setHours(9)).setMinutes(0)).setDate(new Date().getDate() - 2)
+    ),
+    end: new Date(
+      new Date(new Date(new Date().setHours(2)).setMinutes(0)).setDate(new Date().getDate() - 1)
+    ),
+    color: "#079000ff",
+    allDay: false,
+  },
 ];
 
 export const RESOURCES = [
