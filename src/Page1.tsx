@@ -55,6 +55,7 @@ function Page1() {
             stickyNavigation={true}
             stickyNavigationOffset={64}
             currentTimeBarColor="#ff00c3ff"
+            forceInlineMultiDay={true}
             // events={generateRandomEvents(200)}
           />
         </div>
