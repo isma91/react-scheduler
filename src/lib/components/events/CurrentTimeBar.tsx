@@ -10,10 +10,20 @@ interface CurrentTimeBarProps {
   minuteHeight: number;
   timeZone?: string;
   zIndex?: number;
+  currentTime?: Date;
+  color?: string;
 }
 
-function calculateTop({ startHour, step, minuteHeight, timeZone }: CurrentTimeBarProps): number {
-  const now = getTimeZonedDate(new Date(), timeZone);
+function calculateTop({
+  startHour,
+  step,
+  minuteHeight,
+  timeZone,
+  currentTime,
+}: CurrentTimeBarProps): number {
+  const now = currentTime
+    ? getTimeZonedDate(currentTime, timeZone)
+    : getTimeZonedDate(new Date(), timeZone);
 
   const minutesFromTop = differenceInMinutes(now, set(now, { hours: startHour, minutes: 0 }));
   const topSpace = minutesFromTop * minuteHeight;
@@ -26,20 +36,20 @@ function calculateTop({ startHour, step, minuteHeight, timeZone }: CurrentTimeBa
 
 const CurrentTimeBar = (props: CurrentTimeBarProps) => {
   const [top, setTop] = useState(calculateTop(props));
-  const { startHour, step, minuteHeight, timeZone } = props;
+  const { startHour, step, minuteHeight, timeZone, currentTime, color } = props;
 
   useEffect(() => {
-    const calcProps = { startHour, step, minuteHeight, timeZone };
+    const calcProps = { startHour, step, minuteHeight, timeZone, currentTime };
     setTop(calculateTop(calcProps));
     const interval = setInterval(() => setTop(calculateTop(calcProps)), 60 * 1000);
     return () => clearInterval(interval);
-  }, [startHour, step, minuteHeight, timeZone]);
+  }, [startHour, step, minuteHeight, timeZone, currentTime]);
 
   // Prevent showing bar on top of days/header
   if (top < 0) return null;
 
   return (
-    <TimeIndicatorBar style={{ top, zIndex: props.zIndex }}>
+    <TimeIndicatorBar style={{ top, zIndex: props.zIndex }} color={color}>
       <div />
       <div />
     </TimeIndicatorBar>

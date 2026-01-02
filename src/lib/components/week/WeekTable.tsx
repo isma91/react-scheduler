@@ -58,6 +58,9 @@ const WeekTable = ({
     stickyNavigation,
     stickyNavigationOffset,
     stickyNavigationHeight,
+    currentTime,
+    showCurrentTimeBar,
+    currentTimeBarColor,
   } = useStore();
   const { startHour, endHour, step, cellRenderer, disableGoToDay, headRenderer, hourRenderer } =
     week!;
@@ -186,6 +189,9 @@ const WeekTable = ({
                       step={step}
                       direction={direction}
                       timeZone={timeZone}
+                      currentTime={currentTime}
+                      showCurrentTimeBar={showCurrentTimeBar}
+                      currentTimeBarColor={currentTimeBarColor}
                     />
                   )}
                   <Cell

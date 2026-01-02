@@ -383,6 +383,21 @@ export interface SchedulerProps {
    * @default 40
    */
   stickyNavigationHeight?: number;
+  /**
+   * Override the current time used for the red indicator bar.
+   * Useful when working with different timezones or for testing.
+   */
+  currentTime?: Date;
+  /**
+   * Show/hide the current time indicator bar.
+   * @default true
+   */
+  showCurrentTimeBar?: boolean;
+  /**
+   * Color of the current time indicator bar.
+   * @default theme.palette.error.light (red)
+   */
+  currentTimeBarColor?: string;
 }
 
 export interface SchedulerRef {

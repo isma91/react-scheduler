@@ -15,6 +15,9 @@ interface TodayEventsProps {
   minuteHeight: number;
   direction: "rtl" | "ltr";
   timeZone?: string;
+  currentTime?: Date;
+  showCurrentTimeBar?: boolean;
+  currentTimeBarColor?: string;
 }
 const TodayEvents = ({
   todayEvents,
@@ -25,18 +28,23 @@ const TodayEvents = ({
   minuteHeight,
   direction,
   timeZone,
+  currentTime,
+  showCurrentTimeBar = true,
+  currentTimeBarColor,
 }: TodayEventsProps) => {
   const crossingIds: Array<number | string> = [];
 
   return (
     <Fragment>
-      {isTimeZonedToday({ dateLeft: today, timeZone }) && (
+      {showCurrentTimeBar && isTimeZonedToday({ dateLeft: today, timeZone }) && (
         <CurrentTimeBar
           startHour={startHour}
           step={step}
           minuteHeight={minuteHeight}
           timeZone={timeZone}
           zIndex={2 * todayEvents.length + 1}
+          currentTime={currentTime}
+          color={currentTimeBarColor}
         />
       )}
 

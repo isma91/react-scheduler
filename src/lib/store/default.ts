@@ -132,6 +132,7 @@ export const defaultProps = (props: Partial<SchedulerProps>) => {
     draggable: true,
     agenda,
     enableAgenda: typeof agenda === "undefined" || agenda,
+    showCurrentTimeBar: true,
     ...otherProps,
   };
 };

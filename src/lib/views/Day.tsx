@@ -52,6 +52,9 @@ const Day = () => {
     agenda,
     stickyNavigationOffset,
     stickyNavigationHeight,
+    currentTime,
+    showCurrentTimeBar,
+    currentTimeBarColor,
   } = useStore();
 
   const { startHour, endHour, step, cellRenderer, headRenderer, hourRenderer } = day!;
@@ -196,6 +199,9 @@ const Day = () => {
                         step={step}
                         direction={direction}
                         timeZone={timeZone}
+                        currentTime={currentTime}
+                        showCurrentTimeBar={showCurrentTimeBar}
+                        currentTimeBarColor={currentTimeBarColor}
                       />
                     )}
                     {/* Cell */}
@@ -240,6 +246,9 @@ const Day = () => {
       step,
       stickyNavigation,
       timeZone,
+      currentTime,
+      showCurrentTimeBar,
+      currentTimeBarColor,
     ]
   );
 

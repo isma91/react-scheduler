@@ -236,7 +236,7 @@ export const EventActions = styled("div")(({ theme }) => ({
   },
 }));
 
-export const TimeIndicatorBar = styled("div")(({ theme }) => ({
+export const TimeIndicatorBar = styled("div")<{ color?: string }>(({ theme, color }) => ({
   position: "absolute",
   zIndex: 9,
   width: "100%",
@@ -245,12 +245,12 @@ export const TimeIndicatorBar = styled("div")(({ theme }) => ({
     height: 12,
     width: 12,
     borderRadius: "50%",
-    background: theme.palette.error.light,
+    background: color || theme.palette.error.light,
     marginLeft: -6,
     marginTop: -5,
   },
   "& > div:last-of-type": {
-    borderTop: `solid 2px ${theme.palette.error.light}`,
+    borderTop: `solid 2px ${color || theme.palette.error.light}`,
     width: "100%",
   },
 }));
