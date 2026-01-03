@@ -69,6 +69,7 @@ All props are _optional_
 | deletable | boolean. Whether the event item will show the delete button, this is applied to all events, and can be overridden in each event property, see `ProcessedEvent` type.
 | draggable | boolean. Whether activate drag&drop for the events, this is applied to all events, and can be overridden in each event property, see `ProcessedEvent` type.
 | getRemoteEvents | Function(RemoteQuery). Return promise of array of events. Can be used as a callback to fetch events by parent component or fetch.<br><pre>type RemoteQuery = { <br> start: Date;<br> end: Date;<br> view: "day" \| "week" \| "month";<br>}</pre>
+| refetch | Function accessible via ref to manually trigger a reload of remote events. Only works when `getRemoteEvents` is provided. <br>_Usage_: `schedulerRef.current?.scheduler?.refetch()` |
 | fields | Array of extra fields with configurations. <br> Example: <pre> { <br> name: "description", <br> type: "input" , <br> config: { label: "Description", required: true, min: 3, email: true, variant: "outlined", ....<br>}</pre>
 | loading | boolean. Loading state of the calendar table
 | loadingComponent | Custom component to override the default `CircularProgress`
