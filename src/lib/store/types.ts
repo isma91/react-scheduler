@@ -12,6 +12,8 @@ export interface SchedulerState extends SchedulerProps {
   selectedTab?: DefaultResource["assignee"];
   currentDragged?: ProcessedEvent;
   enableAgenda?: boolean;
+  /** @internal */
+  _refetchToken: number;
 }
 
 export interface Store extends SchedulerState {
@@ -30,4 +32,9 @@ export interface Store extends SchedulerState {
     resourceKey?: string,
     resourceVal?: string | number
   ): void;
+  /**
+   * Manually trigger a refetch of remote events.
+   * Only works when `getRemoteEvents` prop is provided.
+   */
+  refetch(): void;
 }

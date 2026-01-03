@@ -20,6 +20,7 @@ const Week = () => {
     resourceFields,
     fields,
     agenda,
+    _refetchToken,
   } = useStore();
   const { weekStartOn, weekDays, startHour, endHour, step } = week!;
   const _weekStart = startOfWeek(selectedDate, { weekStartsOn: weekStartOn });
@@ -56,13 +57,13 @@ const Week = () => {
       triggerLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getRemoteEvents]);
+  }, [getRemoteEvents, _refetchToken]);
 
   useEffect(() => {
     if (getRemoteEvents instanceof Function) {
       fetchEvents();
     }
-  }, [fetchEvents, getRemoteEvents]);
+  }, [fetchEvents, getRemoteEvents, _refetchToken]);
 
   const renderTable = (resource?: DefaultResource) => {
     let resourcedEvents = events;

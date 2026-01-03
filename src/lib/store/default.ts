@@ -154,4 +154,6 @@ export const initialStore = {
   confirmEvent: () => {},
   setCurrentDragged: () => {},
   onDrop: () => {},
+  _refetchToken: 0,
+  refetch: () => {},
 };

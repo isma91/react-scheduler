@@ -56,6 +56,7 @@ const Day = () => {
     showCurrentTimeBar,
     currentTimeBarColor,
     forceInlineMultiDay,
+    _refetchToken,
   } = useStore();
 
   const { startHour, endHour, step, cellRenderer, headRenderer, hourRenderer } = day!;
@@ -91,13 +92,13 @@ const Day = () => {
       triggerLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getRemoteEvents]);
+  }, [getRemoteEvents, _refetchToken]);
 
   useEffect(() => {
     if (getRemoteEvents instanceof Function) {
       fetchEvents();
     }
-  }, [fetchEvents, getRemoteEvents]);
+  }, [fetchEvents, getRemoteEvents, _refetchToken]);
 
   const renderMultiDayEvents = useCallback(
     (events: ProcessedEvent[]) => {

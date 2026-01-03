@@ -198,6 +198,12 @@ export const StoreProvider = ({ children, initial }: Props) => {
     }
   };
 
+  const refetch = () => {
+    if (initial.getRemoteEvents) {
+      set((prev) => ({ ...prev, _refetchToken: prev._refetchToken + 1 }));
+    }
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -211,6 +217,7 @@ export const StoreProvider = ({ children, initial }: Props) => {
         confirmEvent,
         setCurrentDragged,
         onDrop,
+        refetch,
       }}
     >
       {children}
