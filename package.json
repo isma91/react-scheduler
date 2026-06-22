@@ -21,7 +21,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --ci",
-    "check:dist": "node ./scripts/check-dist.js",
+    "check:dist": "node ./scripts/check-dist.mjs",
     "prepublishOnly": "npm run build && npm run check:dist && npm pack --dry-run"
   },
   "main": "dist/index.js",
