@@ -1,9 +1,9 @@
 {
   "name": "@isma91/react-scheduler",
-  "version": "4.0.7",
+  "version": "4.0.8",
   "description": "React scheduler component based on Material-UI & date-fns",
   "files": [
-    "dist"
+    "*"
   ],
   "type": "module",
   "scripts": {
@@ -22,7 +22,8 @@
     "test:watch": "jest --watch",
     "test:ci": "jest --ci",
     "check:dist": "node ./scripts/check-dist.mjs",
-    "prepublishOnly": "npm run build && npm run check:dist && npm pack --dry-run"
+    "prepublishOnly": "npm run build && npm run check:dist && npm pack --dry-run",
+    "publish": "npm run build && (cd dist && npm publish --access public)"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
