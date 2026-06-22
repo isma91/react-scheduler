@@ -22,7 +22,15 @@ const AgendaEventsList = ({ day, events }: AgendaEventsListProps) => {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<ProcessedEvent>();
   const [deleteConfirm, setDeleteConfirm] = useState(false);
-  const { locale, hourFormat, eventRenderer, onEventClick, timeZone, disableViewer } = useStore();
+  const {
+    locale,
+    hourFormat,
+    eventRenderer,
+    onEventClick,
+    timeZone,
+    disableViewer,
+    displayHourRange = true,
+  } = useStore();
   const theme = useTheme();
   const hFormat = getHourFormat(hourFormat);
 
@@ -94,7 +102,10 @@ const AgendaEventsList = ({ day, events }: AgendaEventsListProps) => {
                   {event.agendaAvatar || " "}
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary={event.title} secondary={`${startDate} - ${endDate}`} />
+              <ListItemText
+                primary={event.title}
+                secondary={displayHourRange ? `${startDate} - ${endDate}` : undefined}
+              />
             </ListItemButton>
           );
         })}

@@ -107,6 +107,7 @@ All props are _optional_
 | showCurrentTimeBar | boolean. Show/hide the current time indicator bar. <br>_Default_: `true` |
 | currentTimeBarColor | string. Color of the current time indicator bar. <br>_Default_: `theme.palette.error.light` (red) |
 | forceInlineMultiDay | boolean. When `true`, events spanning multiple days with `allDay: false` will be displayed in the time grid instead of the all-day header. Events will be split visually at midnight boundaries. <br>_Default_: `false` |
+| displayHourRange | boolean. Controls visibility of the secondary information in Agenda list items. When `false`, hides the secondary text.<br>_Default_: `true` |
 
 ### SchedulerRef
 

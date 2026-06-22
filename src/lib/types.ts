@@ -413,6 +413,12 @@ export interface SchedulerProps {
    * @default false
    */
   forceInlineMultiDay?: boolean;
+  /**
+   * Controls visibility of the secondary information in Agenda list items.
+   * When false, hides the secondary text.
+   * @default true
+   */
+  displayHourRange?: boolean;
 }
 
 export interface SchedulerRef {
